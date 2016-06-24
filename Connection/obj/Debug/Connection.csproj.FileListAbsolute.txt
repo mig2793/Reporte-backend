@@ -1,0 +1,6 @@
+C:\Users\mgonzalez.REDMINCIVIL\Documents\Visual Studio 2015\Projects\ReporteDiario\Connection\bin\Debug\Connection.dll
+C:\Users\mgonzalez.REDMINCIVIL\Documents\Visual Studio 2015\Projects\ReporteDiario\Connection\bin\Debug\Connection.pdb
+C:\Users\mgonzalez.REDMINCIVIL\Documents\Visual Studio 2015\Projects\ReporteDiario\Connection\obj\Debug\Connection.csprojResolveAssemblyReference.cache
+C:\Users\mgonzalez.REDMINCIVIL\Documents\Visual Studio 2015\Projects\ReporteDiario\Connection\obj\Debug\Connection.dll
+C:\Users\mgonzalez.REDMINCIVIL\Documents\Visual Studio 2015\Projects\ReporteDiario\Connection\obj\Debug\Connection.pdb
+C:\Users\mgonzalez.REDMINCIVIL\documents\visual studio 2015\Projects\ReporteDiario\Connection\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
