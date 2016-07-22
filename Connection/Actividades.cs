@@ -84,6 +84,14 @@ namespace Connection
             comando.Parameters.AddWithValue("@horas", horas);
             return ConexionBD.EjecutarComando(comando);
         }
+        public int UpdatehorasProgramadas(int action, int id, int horas_programadas)
+        {
+            SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm2");
+            comando.Parameters.AddWithValue("@action", action);
+            comando.Parameters.AddWithValue("@horas_programadas", horas_programadas);
+            comando.Parameters.AddWithValue("@id", id);
+            return ConexionBD.EjecutarComando(comando);
+        }
 
         public int DeleteActividades(int action, int id)
         {

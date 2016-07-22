@@ -71,11 +71,20 @@ namespace WebApplication1
             return actividadesT;
         }
         [WebMethod]
+        public int UpdatehorasProgramadas(int action, int id, int horas_programdas)
+        {
+            int actividadesT;
+            Actividades actividad = new Actividades();
+            actividadesT = actividad.UpdatehorasProgramadas(action, id, horas_programdas);
+
+            return actividadesT;
+        }
+        [WebMethod]
         public int DeleteActividades(int action, int id)
         {
             int actividadesT;
             Actividades actividad = new Actividades();
-            sactividadesT = actividad.DeleteActividades(action, id);
+            actividadesT = actividad.DeleteActividades(action, id);
 
             return actividadesT;
         }

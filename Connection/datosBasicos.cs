@@ -14,9 +14,12 @@ namespace Connection
         private int id;
         private string codMaq;
         private string codTrailer;
-        private int id_operario;
-        private DateTime fecha_inicio;
-        private DateTime fecha_fin;
+        private string id_operario;
+        private string fecha_inicio;
+        private string fecha_fin;
+        private string hora_inicio;
+        private string hora_fin;
+        private int horas_programadas;
         private int horometro_inicial;
         private int horometro_final;
         private int kilometro_inicial;
@@ -45,17 +48,22 @@ namespace Connection
             get { return codTrailer; }
             set { codTrailer = value; }
         }
-        public int _id_operario
+        public string _id_operario
         {
             get { return id_operario; }
             set { id_operario = value; }
         }
-        public DateTime _fecha_inicio
+        public int _horas_programadas
+        {
+            get { return horas_programadas; }
+            set { horas_programadas = value; }
+        }
+        public string _fecha_inicio
         {
             get { return fecha_inicio; }
             set { fecha_inicio = value; }
         }
-        public DateTime _fecha_fin
+        public string _fecha_fin
         {
             get { return fecha_fin; }
             set { fecha_fin = value; }
@@ -113,14 +121,14 @@ namespace Connection
         #endregion
 
         #region Metodos
-        public int InsertDataBasic(int action, string id_codMaq, string id_operario, DateTime fecha_inicio, DateTime fecha_fin, int horometro_inicial, int horometro_final, int kilometro_inicial, int kilometro_final, string id_codTrailer, int kilometro_i_trailer, int kilometro_f_trailer, int id_centroCostos, int id_frente, string id_supervisor, string num_celular)
+        public int InsertDataBasic(int action, string id_codMaq, string id_operario, string fecha_inicio, string hora_inicio, int horometro_inicial, int horometro_final, int kilometro_inicial, int kilometro_final, string id_codTrailer, int kilometro_i_trailer, int kilometro_f_trailer, int id_centroCostos, int id_frente, string id_supervisor, string num_celular)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
             comando.Parameters.AddWithValue("@action", action);
             comando.Parameters.AddWithValue("@id_codMaq", id_codMaq);
             comando.Parameters.AddWithValue("@id_operario", id_operario);
             comando.Parameters.AddWithValue("@fecha_inicio", fecha_inicio);
-            comando.Parameters.AddWithValue("@fecha_fin", fecha_fin);
+            comando.Parameters.AddWithValue("@hora_inicio", hora_inicio);
             comando.Parameters.AddWithValue("@horometro_inicial", horometro_inicial);
             comando.Parameters.AddWithValue("@horometro_final", horometro_final);
             comando.Parameters.AddWithValue("@kilometro_inicial", kilometro_inicial);
@@ -134,13 +142,12 @@ namespace Connection
             comando.Parameters.AddWithValue("@num_celular", num_celular);
             return ConexionBD.EjecutarComando(comando);
         }
-        public int UpdateDataBasic(int action, string id, DateTime fecha_inicio, DateTime fecha_fin, int horometro_inicial, int horometro_final, int kilometro_inicial, int kilometro_final, string id_codTrailer, int kilometro_i_trailer, int kilometro_f_trailer, string num_celular)
+        public int UpdateDataBasic(int action, string id, int horometro_inicial, int horometro_final, int kilometro_inicial, int kilometro_final, string id_codTrailer, int kilometro_i_trailer, int kilometro_f_trailer, string num_celular)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
             comando.Parameters.AddWithValue("@action", action);
             comando.Parameters.AddWithValue("@id", id);
             comando.Parameters.AddWithValue("@fecha_inicio", fecha_inicio);
-            comando.Parameters.AddWithValue("@fecha_fin", fecha_fin);
             comando.Parameters.AddWithValue("@horometro_inicial", horometro_inicial);
             comando.Parameters.AddWithValue("@horometro_final", horometro_final);
             comando.Parameters.AddWithValue("@kilometro_inicial", kilometro_inicial);
@@ -158,13 +165,19 @@ namespace Connection
             comando.Parameters.AddWithValue("@codMaquina", id_codMaq);
             return ConexionBD.EjecutarSelect(comando);
         }
-        public DataTable selectAllReport(int action, string id_codMaq, int id_operario, DateTime fecha_inicio)
+        public DataTable selectAllReport(int action, string id_codMaq, string id_operario, string fecha_inicio)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
             comando.Parameters.AddWithValue("@action", action);
-            comando.Parameters.AddWithValue("@codMaquina", id_codMaq);
+            comando.Parameters.AddWithValue("@id_codMaq", id_codMaq);
             comando.Parameters.AddWithValue("@id_operario", id_operario);
             comando.Parameters.AddWithValue("@fecha_inicio", fecha_inicio);
+            return ConexionBD.EjecutarSelect(comando);
+        }
+        public DataTable selectTrailer(int action)
+        {
+            SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
+            comando.Parameters.AddWithValue("@action", action);
             return ConexionBD.EjecutarSelect(comando);
         }
         #endregion
