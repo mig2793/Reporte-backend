@@ -70,6 +70,16 @@ namespace WebApplication1
 
             return actividades;
         }
+
+        [WebMethod]
+        public int TerminarTurno(int action, int id ,string fecha_fin, string hora_fin)
+        {
+            int actividades;
+            Fallo actividad = new Fallo();
+            actividades = actividad.TerminarTurno(action, id, fecha_fin, hora_fin);
+
+            return actividades;
+        }
         [WebMethod]
         public int DeleteActividades(int action, int id)
         {

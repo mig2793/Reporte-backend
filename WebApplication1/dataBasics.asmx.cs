@@ -29,7 +29,7 @@ namespace WebApplication1
 
             foreach (DataRow row in selectMaquinaDT.Rows)
             {
-                selectMaquina.Add(new datosBasicos() { _codMaq = row["valor"].ToString() });
+                selectMaquina.Add(new datosBasicos() { _codMaq = row["CodigoMaq"].ToString(), _sistema = row["Sistema"].ToString() });
             }
 
             return selectMaquina;

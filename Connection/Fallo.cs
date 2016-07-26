@@ -85,6 +85,15 @@ namespace Connection
             comando.Parameters.AddWithValue("@severidad", severidad);
             return ConexionBD.EjecutarComando(comando);
         }
+        public int TerminarTurno(int action,int id, string fecha_fin, string hora_fin)
+        {
+            SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
+            comando.Parameters.AddWithValue("@action", action);
+            comando.Parameters.AddWithValue("@id", id);
+            comando.Parameters.AddWithValue("@fecha_fin", fecha_fin);
+            comando.Parameters.AddWithValue("@hora_fin", hora_fin);
+            return ConexionBD.EjecutarComando(comando);
+        }
 
         public int DeleteActividades(int action, int id)
         {

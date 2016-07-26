@@ -19,6 +19,7 @@ namespace Connection
         private string fecha_fin;
         private string hora_inicio;
         private string hora_fin;
+        private string sistema;
         private int horas_programadas;
         private int horometro_inicial;
         private int horometro_final;
@@ -117,6 +118,11 @@ namespace Connection
         {
             get { return num_celular; }
             set { num_celular = value; }
+        }
+        public string _sistema
+        {
+            get { return sistema; }
+            set { sistema = value; }
         }
         #endregion
 
