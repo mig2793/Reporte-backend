@@ -36,6 +36,23 @@ namespace WebApplication1
 
         }
         [WebMethod]
+        public List<datosBasicos> ValidarHorometro(int action, int horometro_final)
+        {
+            List<datosBasicos> horometroValidacion = new List<datosBasicos>();
+            DataTable horometroVTable = new DataTable();
+            datosBasicos datosBasicos = new datosBasicos();
+
+            horometroVTable = datosBasicos.validarHorometro(action, horometro_final);
+
+            foreach (DataRow row in horometroVTable.Rows)
+            {
+                horometroValidacion.Add(new datosBasicos() { _horometro_final = Int32.Parse(row["horometro_final"].ToString()) });
+            }
+
+            return horometroValidacion;
+
+        }
+        [WebMethod]
         public List<datosBasicos> selectTrailer(int action)
         {
             List<datosBasicos> selectMaquina = new List<datosBasicos>();

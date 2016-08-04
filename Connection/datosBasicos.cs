@@ -186,6 +186,13 @@ namespace Connection
             comando.Parameters.AddWithValue("@action", action);
             return ConexionBD.EjecutarSelect(comando);
         }
+        public DataTable validarHorometro(int action, int horometro_final)
+        {
+            SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
+            comando.Parameters.AddWithValue("@action", action);
+            comando.Parameters.AddWithValue("@horometro_final", @horometro_final);
+            return ConexionBD.EjecutarSelect(comando);
+        }
         #endregion
 
     }
