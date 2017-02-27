@@ -20,17 +20,19 @@ namespace Connection
         private string hora_inicio;
         private string hora_fin;
         private string sistema;
-        private int horas_programadas;
+        private decimal horas_programadas;
         private int horometro_inicial;
         private int horometro_final;
         private int kilometro_inicial;
         private int kilometro_final;
         private int kilometro_i_trailer;
         private int kilometro_f_trailer;
-        private int id_centroCostos;
+        private string id_centroCostos;
         private int id_frente;
-        private int id_supervisor;
-        private string num_celular;
+        private int id_Frente;
+        private string Frente;
+        private string proyecto;
+        private string id_proyecto;
         #endregion
 
         #region Metodos Set Get
@@ -54,7 +56,7 @@ namespace Connection
             get { return id_operario; }
             set { id_operario = value; }
         }
-        public int _horas_programadas
+        public decimal _horas_programadas
         {
             get { return horas_programadas; }
             set { horas_programadas = value; }
@@ -99,7 +101,7 @@ namespace Connection
             get { return kilometro_f_trailer; }
             set { kilometro_f_trailer = value; }
         }
-        public int _id_centroCostos
+        public string _id_centroCostos
         {
             get { return id_centroCostos; }
             set { id_centroCostos = value; }
@@ -109,25 +111,35 @@ namespace Connection
             get { return id_frente; }
             set { id_frente = value; }
         }
-        public int _id_supervisor
-        {
-            get { return id_supervisor; }
-            set { id_supervisor = value; }
-        }
-        public string _num_celular
-        {
-            get { return num_celular; }
-            set { num_celular = value; }
-        }
         public string _sistema
         {
             get { return sistema; }
             set { sistema = value; }
         }
+        public string _proyecto
+        {
+            get { return proyecto; }
+            set { proyecto = value; }
+        }
+        public string _id_proyecto
+        {
+            get { return id_proyecto; }
+            set { id_proyecto = value; }
+        }
+        public string _Frente
+        {
+            get { return Frente; }
+            set { Frente = value; }
+        }
+        public int _id_Frente
+        {
+            get { return id_Frente; }
+            set { id_Frente = value; }
+        }
         #endregion
 
         #region Metodos
-        public int InsertDataBasic(int action, string id_codMaq, string id_operario, string fecha_inicio, string hora_inicio, int horometro_inicial, int horometro_final, int kilometro_inicial, int kilometro_final, string id_codTrailer, int kilometro_i_trailer, int kilometro_f_trailer, int id_centroCostos, int id_frente, string id_supervisor, string num_celular)
+        public int InsertDataBasic(int action, string id_codMaq, string id_operario, string fecha_inicio, string hora_inicio, int horometro_inicial, int horometro_final, int kilometro_inicial, int kilometro_final, string id_codTrailer, int kilometro_i_trailer, int kilometro_f_trailer, string id_centroCostos, int id_frente)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
             comando.Parameters.AddWithValue("@action", action);
@@ -144,11 +156,9 @@ namespace Connection
             comando.Parameters.AddWithValue("@kilometro_f_trailer", kilometro_f_trailer);
             comando.Parameters.AddWithValue("@id_centroCostos", id_centroCostos);
             comando.Parameters.AddWithValue("@id_frente", id_frente);
-            comando.Parameters.AddWithValue("@id_supervisor", id_supervisor);
-            comando.Parameters.AddWithValue("@num_celular", num_celular);
             return ConexionBD.EjecutarComando(comando);
         }
-        public int UpdateDataBasic(int action, string id, int horometro_inicial, int horometro_final, int kilometro_inicial, int kilometro_final, string id_codTrailer, int kilometro_i_trailer, int kilometro_f_trailer, string num_celular)
+        public int UpdateDataBasic(int action, string id, int horometro_inicial, int horometro_final, int kilometro_inicial, int kilometro_final, string id_codTrailer, int kilometro_i_trailer, int kilometro_f_trailer, int id_frente)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
             comando.Parameters.AddWithValue("@action", action);
@@ -161,7 +171,7 @@ namespace Connection
             comando.Parameters.AddWithValue("@id_codTrailer", id_codTrailer);
             comando.Parameters.AddWithValue("@kilometro_i_trailer", kilometro_i_trailer);
             comando.Parameters.AddWithValue("@kilometro_f_trailer", kilometro_f_trailer);
-            comando.Parameters.AddWithValue("@num_celular", num_celular);
+            comando.Parameters.AddWithValue("@id_frente", id_frente);
             return ConexionBD.EjecutarComando(comando);
         }
         public DataTable selectMaquina(int action, string id_codMaq)
@@ -186,11 +196,26 @@ namespace Connection
             comando.Parameters.AddWithValue("@action", action);
             return ConexionBD.EjecutarSelect(comando);
         }
-        public DataTable validarHorometro(int action, int horometro_final)
+        public DataTable validarHorometro(int action, string id_codMaq)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
             comando.Parameters.AddWithValue("@action", action);
-            comando.Parameters.AddWithValue("@horometro_final", @horometro_final);
+             comando.Parameters.AddWithValue("@id_codMaq", id_codMaq);
+            return ConexionBD.EjecutarSelect(comando);
+        }
+        public DataTable getProjects()
+        {
+            int action = 8;
+            SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
+            comando.Parameters.AddWithValue("@action", action);
+            return ConexionBD.EjecutarSelect(comando);
+        }
+        public DataTable getFrentes(string project)
+        {
+            int action = 10;
+            SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm1");
+            comando.Parameters.AddWithValue("@action", action);
+            comando.Parameters.AddWithValue("@id_centroCostos", project);
             return ConexionBD.EjecutarSelect(comando);
         }
         #endregion

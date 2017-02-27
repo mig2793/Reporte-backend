@@ -17,8 +17,8 @@ namespace Connection
         private int id_no_trbaajadas;
         private string nombre_actividad;
         private string nombre_no_trbajada;
-        private int horas_actividades;
-        private int horas_no_trabajadas;
+        private decimal horas_actividades;
+        private decimal horas_no_trabajadas;
 
         #endregion
 
@@ -48,12 +48,12 @@ namespace Connection
             get { return nombre_no_trbajada; }
             set { nombre_no_trbajada = value; }
         }
-        public int _horas_actividades
+        public decimal _horas_actividades
         {
             get { return horas_actividades; }
             set { horas_actividades = value; }
         }
-        public int _horas_no_trabajadas
+        public decimal _horas_no_trabajadas
         {
             get { return horas_no_trabajadas; }
             set { horas_no_trabajadas = value; }
@@ -62,10 +62,11 @@ namespace Connection
 
         #region Metodos CRUD
 
-        public DataTable selectActividades(int action)
+        public DataTable selectActividades(int action, int frenteId)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm2");
             comando.Parameters.AddWithValue("@action",action);
+            comando.Parameters.AddWithValue("@id_frente", frenteId);
             return ConexionBD.EjecutarSelect(comando);
         }
         public DataTable selectActividadesTyNT(int action, int id)
@@ -75,7 +76,7 @@ namespace Connection
             comando.Parameters.AddWithValue("@id", id);
             return ConexionBD.EjecutarSelect(comando);
         }
-        public int InsertarActividades(int action,int id_ReporteD,int id_Actividades, int horas)
+        public int InsertarActividades(int action,int id_ReporteD,int id_Actividades, decimal horas)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm2");
             comando.Parameters.AddWithValue("@action", action);
@@ -84,7 +85,7 @@ namespace Connection
             comando.Parameters.AddWithValue("@horas", horas);
             return ConexionBD.EjecutarComando(comando);
         }
-        public int UpdatehorasProgramadas(int action, int id, int horas_programadas)
+        public int UpdatehorasProgramadas(int action, int id, decimal horas_programadas)
         {
             SqlCommand comando = ConexionBD.crearComandoProc("ReportDailyForm2");
             comando.Parameters.AddWithValue("@action", action);

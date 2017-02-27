@@ -18,13 +18,13 @@ namespace WebApplication1
     {
 
         [WebMethod]
-        public List<Actividades> selectActividades(int action)
+        public List<Actividades> selectActividades(int action, int frenteId)
         {
             List<Actividades> actividades = new List<Actividades>();
             DataTable actividadesT = new DataTable();
             Actividades actividad = new Actividades();
 
-            actividadesT = actividad.selectActividades(action);
+            actividadesT = actividad.selectActividades(action, frenteId);
 
             foreach (DataRow row in actividadesT.Rows)
             {
@@ -46,7 +46,7 @@ namespace WebApplication1
             {
                 foreach (DataRow row in actividadesT.Rows)
                 {
-                    actividades.Add(new Actividades() { _id = Int32.Parse(row["id"].ToString()), _id_actividad = Int32.Parse(row["id_Actividades"].ToString()), _horas_actividades = Int32.Parse(row["horas"].ToString()), _nombre_actividad = row["nombre"].ToString() });
+                    actividades.Add(new Actividades() { _id = Int32.Parse(row["id"].ToString()), _id_actividad = Int32.Parse(row["id_Actividades"].ToString()), _horas_actividades = Decimal.Parse(row["horas"].ToString()), _nombre_actividad = row["nombre"].ToString() });
                 }
 
             }
@@ -54,7 +54,7 @@ namespace WebApplication1
             {
                 foreach (DataRow row in actividadesT.Rows)
                 {
-                    actividades.Add(new Actividades() { _id = Int32.Parse(row["id"].ToString()), _id_actividad = Int32.Parse(row["id_ActividadesNT"].ToString()), _horas_actividades = Int32.Parse(row["horas"].ToString()), _nombre_actividad = row["nombre"].ToString() });
+                    actividades.Add(new Actividades() { _id = Int32.Parse(row["id"].ToString()), _id_actividad = Int32.Parse(row["id_ActividadesNT"].ToString()), _horas_actividades = Decimal.Parse(row["horas"].ToString()), _nombre_actividad = row["nombre"].ToString() });
                 }
             }
 
@@ -62,7 +62,7 @@ namespace WebApplication1
             return actividades;
         } 
         [WebMethod]
-        public int InsertarActividades(int action, int id_ReporteD, int id_Actividades, int horas)
+        public int InsertarActividades(int action, int id_ReporteD, int id_Actividades, decimal horas)
         {
             int actividadesT;
             Actividades actividad = new Actividades();
@@ -71,7 +71,7 @@ namespace WebApplication1
             return actividadesT;
         }
         [WebMethod]
-        public int UpdatehorasProgramadas(int action, int id, int horas_programdas)
+        public int UpdatehorasProgramadas(int action, int id, decimal horas_programdas)
         {
             int actividadesT;
             Actividades actividad = new Actividades();
